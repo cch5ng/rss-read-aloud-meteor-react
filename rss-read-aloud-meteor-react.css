@@ -1,0 +1,148 @@
+/* CSS declarations go here */
+
+
+/* public/css/style.css */
+
+/* nav */
+
+
+.logo {
+	font-family: 'Oswald', sans-serif;
+}
+
+/* bootstrap override */
+
+.navbar-default {
+	border-radius: 0;
+	border: 0;
+	background-image: none;
+	box-shadow: none;
+	background-color: #00004c; /*#f36b54;*/ /*#f8ab9d;*/ /* #f1573c;*/ /*#b93c32;*/
+}
+
+.navbar-default .navbar-brand {
+		color: #19E3D9;
+}
+
+/* player controls */
+
+.audio-player {
+	position: absolute;
+	left: 50%;
+}
+
+.audio-control {
+	padding: 15px 8px;
+	background-color: rgba(204, 204, 204, 0.8); /* #ccc */
+}
+
+.fa {
+	color: #000;
+}
+
+/* header */
+
+.banner {
+	margin-top: -20px;
+}
+
+h2 {
+	text-align: center;
+}
+
+/* feeds */
+
+.h3-npr, .h3-bbc, .h3-yahoo {
+	text-align: center;
+	padding: 8px 0;
+}
+
+.h3-npr {
+	background-color: #009ca8;
+}
+
+.h3-bbc {
+	background-color: #326cb9; /*#0048a8;*/
+}
+
+.h3-yahoo {
+	background-color: #00a860;
+}
+
+.feed, .feed-bbc, .feed-yahoo {
+	border-bottom: 1px solid #999;
+}
+
+p {
+	font-family: 'Neuton', serif;
+	font-size: 1.3em;
+}
+
+a {
+	color: #56778e; /* #6388a2;*/ /*#363c46;*/
+}
+
+a.logo {
+	color: #19E3D9;
+}
+
+a:link, a:visited {
+	color: #56778e; /* #6388a2;*/ /* #363c46; */
+}
+
+a:active, a:hover {
+	color: #56778e; /* #6388a2;*/ /* #363c46; */
+	text-decoration: underline;
+}
+
+.hidden {
+	display: none;
+}
+
+/* footer */
+
+footer {
+	background-color: #ccccdb; /* #b2b2c9; */
+	height: 150px;
+	margin-top: 30px;
+	padding-top: 15px;
+}
+
+/* media queries */
+
+@media (min-width: 760px) {
+
+	.fa {
+		color: #fff;
+	}
+
+	.audio-control {
+		/* hide background for tablets+ */
+		background-color: rgba(204, 204, 204, 0);
+	}
+
+	h2 {
+		text-align: left;
+	}
+
+	.h3-npr, .h3-bbc, .h3-yahoo {
+		text-align: left;
+	}
+
+/* set feed heights to align cells vertically */
+	.feed {
+		min-height: 285px;
+		max-height: 285px;
+		border-bottom: 1px solid #999;
+	}
+
+	.feed-bbc {
+		min-height: 225px;
+		max-height: 225px;
+		border-bottom: 1px solid #999;
+	}
+
+	.feed-yahoo {
+
+	}
+}
