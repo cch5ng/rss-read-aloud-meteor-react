@@ -11,8 +11,8 @@ Meteor.startup(function() {
 				//console.log('size NprFeeds collection: ' + NprFeeds.find().count());
 
 				$ = cheerio.load(result.content, {
-				    normalizeWhitespace: true,
-				    xmlMode: true
+					normalizeWhitespace: true,
+					xmlMode: true
 				});
 				//console.log($);
 				//var feeds = $('item');
@@ -24,32 +24,35 @@ Meteor.startup(function() {
 					//setTimeout(function() {
 						var feedObj = {};
 						var feedId;
-	         			feedObj.link = $(this).find('link').text();//.contents();
+						feedObj.link = $(this).find('link').text();//.contents();
 						feedObj._id = prefix + feedObj.link;
 						console.log('id: ' + feedObj._id);
 						console.log('type of id: ' + typeof feedObj._id);
-	        			feedObj.title = $(this).find('title').text();//.contents();
-	        			console.log('title: ' + feedObj.title);
-	         			feedObj.description = $(this).find('description').text();//.contents();
-	         			console.log('description: ' + feedObj.description);
-	         			//feedObj.pubDate = $(this).find('pubDate').contents();
-	         			//console.log('pubDate: ' + feedObj.pubDate);
-	         			//console.log('link: ' + feedObj.link);
-	         			//var feedId = NprFeeds.insert(feedObj);
-	         			console.log('feedObj: ' + feedObj);
-	         			//nprFeedsAr.push(feedObj);
-	         			//verify that the feed is new
-	         			if (!Nprfeeds.find(feedObj._id)) {
-		         			Nprfeeds.insert(feedObj, function(er, id) {
-		         				console.log('id: ' + id);
-		         				if (!er) {
+						feedObj.title = $(this).find('title').text();//.contents();
+						console.log('title: ' + feedObj.title);
+						feedObj.description = $(this).find('description').text();//.contents();
+						console.log('description: ' + feedObj.description);
+						//feedObj.pubDate = $(this).find('pubDate').contents();
+						//console.log('pubDate: ' + feedObj.pubDate);
+						//console.log('link: ' + feedObj.link);
+						//var feedId = NprFeeds.insert(feedObj);
+						console.log('feedObj: ' + feedObj);
+						//nprFeedsAr.push(feedObj);
+						//verify that the feed is new
+//TODO issue inserting into db
+						if (!Nprfeeds.findOne(feedObj._id)) {
+							Nprfeeds.insert(feedObj, function(er, id) {
+								console.log('id: ' + id);
+								if (!er) {
 									console.log('insert');
 									console.log('size NprFeeds collection: ' + Nprfeeds.find().count());
-		         				} else {
-		         					console.log('error: ' + er);
-		         				}
+								} else {
+									console.log('error: ' + er);
+								}
 							});
-	         			}
+						} else {
+							console.log('could not insert');
+						}
 
 					//}, 0);
 				});
@@ -57,14 +60,14 @@ Meteor.startup(function() {
 				console.log('size NprFeeds collection: ' + Nprfeeds.find().count());
 
 				// for (var i = 0; i < nprFeedsAr.length; i++) {
-				 	// var feedId = Nprfeeds.insert(nprFeedsAr[0], function(er, id) {
-				 	// 	if (!er) {
+					// var feedId = Nprfeeds.insert(nprFeedsAr[0], function(er, id) {
+					// 	if (!er) {
 					 // 		console.log('insert');
 					 // 		console.log('size NprFeeds collection: ' + Nprfeeds.find().count());
-				 	// 	} else {
-				 	// 		console.log('err insert: ' + er);
-				 	// 	}
-				 	// });
+					// 	} else {
+					// 		console.log('err insert: ' + er);
+					// 	}
+					// });
 				// }
 
 

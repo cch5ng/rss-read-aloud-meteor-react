@@ -3,6 +3,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" >
   <title>RSS Feed Read-Aloud</title>
 	<link rel="import" href="bower_components/voice-elements/dist/voice-player.html">
+	<link rel="import" href="bower_components/polymer/polymer-micro.html">
+	<link rel="import" href="bower_components/polymer/polymer-mini.html">
   <link href='https://fonts.googleapis.com/css?family=Neuton' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 </head>
@@ -33,7 +35,7 @@
 
   <div class="container-fluid banner">
     <div class="row">
-      <img srcset="vollmer_newsroom_md.jpg 360w, vollmer_newsroom_lg.jpg 760w, vollmer_newsroom_xlg.jpg 1200w" src="vollmer_newsroom_md.jpg" class="img-responsive" alt="Newsroom von RIA Novosti in Moskau by Jürg Vollmer. https://www.flickr.com/photos/maiakinfo/5640066385/in/photolist-9AoPeT-bE8snY-5pgSvN-9X8Yrh-Gri4B-7JNRQ9-6ckxZR-f8wovJ-dZY5ZU-f8ppSZ-5erdaf-pZmzUA-ahSnTc-7PZQLJ-7JJW92-e7sUPx-7NsAfz-7yGkhK-7FQtE6-7PWwa4-4rAUut-891aTy-dcSBcQ-e3ABUQ-dcT2Ej-7FQtAT-5yqxUK-7FQtK6-9uAnL2-4qoXRK-6stm6w-4GdKk5-7FQtHt-fyMKTJ-GrkeP-9mFSFW-7NsAjc-54BaFS-7NP2Vh-7BzubH-JYExt-7yGk6n-88WVyM-891aVU-88WVu2-88WVsz-9EvoEc-9Evotk-9EyirJ-9Eyioo . CC by-SA 2.0" data-toggle="tooltip" data-placement="bottom" title="Newsroom von RIA Novosti in Moskau by Jürg Vollmer. https://www.flickr.com/photos/maiakinfo/5640066385/in/photolist-9AoPeT-bE8snY-5pgSvN-9X8Yrh-Gri4B-7JNRQ9-6ckxZR-f8wovJ-dZY5ZU-f8ppSZ-5erdaf-pZmzUA-ahSnTc-7PZQLJ-7JJW92-e7sUPx-7NsAfz-7yGkhK-7FQtE6-7PWwa4-4rAUut-891aTy-dcSBcQ-e3ABUQ-dcT2Ej-7FQtAT-5yqxUK-7FQtK6-9uAnL2-4qoXRK-6stm6w-4GdKk5-7FQtHt-fyMKTJ-GrkeP-9mFSFW-7NsAjc-54BaFS-7NP2Vh-7BzubH-JYExt-7yGk6n-88WVyM-891aVU-88WVu2-88WVsz-9EvoEc-9Evotk-9EyirJ-9Eyioo . CC by-SA 2.0">
+      <img srcset="vollmer_newsroom_md.jpg 360w, vollmer_newsroom_lg.jpg 760w, vollmer_newsroom_xlg3.jpg 1200w" src="vollmer_newsroom_md.jpg" class="img-responsive" alt="Newsroom von RIA Novosti in Moskau by Jürg Vollmer. https://www.flickr.com/photos/maiakinfo/5640066385/in/photolist-9AoPeT-bE8snY-5pgSvN-9X8Yrh-Gri4B-7JNRQ9-6ckxZR-f8wovJ-dZY5ZU-f8ppSZ-5erdaf-pZmzUA-ahSnTc-7PZQLJ-7JJW92-e7sUPx-7NsAfz-7yGkhK-7FQtE6-7PWwa4-4rAUut-891aTy-dcSBcQ-e3ABUQ-dcT2Ej-7FQtAT-5yqxUK-7FQtK6-9uAnL2-4qoXRK-6stm6w-4GdKk5-7FQtHt-fyMKTJ-GrkeP-9mFSFW-7NsAjc-54BaFS-7NP2Vh-7BzubH-JYExt-7yGk6n-88WVyM-891aVU-88WVu2-88WVsz-9EvoEc-9Evotk-9EyirJ-9Eyioo . CC by-SA 2.0" data-toggle="tooltip" data-placement="bottom" title="Newsroom von RIA Novosti in Moskau by Jürg Vollmer. https://www.flickr.com/photos/maiakinfo/5640066385/in/photolist-9AoPeT-bE8snY-5pgSvN-9X8Yrh-Gri4B-7JNRQ9-6ckxZR-f8wovJ-dZY5ZU-f8ppSZ-5erdaf-pZmzUA-ahSnTc-7PZQLJ-7JJW92-e7sUPx-7NsAfz-7yGkhK-7FQtE6-7PWwa4-4rAUut-891aTy-dcSBcQ-e3ABUQ-dcT2Ej-7FQtAT-5yqxUK-7FQtK6-9uAnL2-4qoXRK-6stm6w-4GdKk5-7FQtHt-fyMKTJ-GrkeP-9mFSFW-7NsAjc-54BaFS-7NP2Vh-7BzubH-JYExt-7yGk6n-88WVyM-891aVU-88WVu2-88WVsz-9EvoEc-9Evotk-9EyirJ-9Eyioo . CC by-SA 2.0">
     </div>
   </div>
 
@@ -64,8 +66,8 @@
 <!--TODO test whether single page can handle multiple voice-player elements and whether this is a good practice -->
 <!--  <voice-player id="hacker-news"></voice-player>-->
 <!-- TODO try to get the hacker news story indexes in a main.js iife to help with the nested ajax timing issue -->
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-  <script src="client/main.js"></script>
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="main.js"></script>
   <!-- comment out because of nested ajax timing issue
   <script src="js/hackerNewsBundle.js"></script>
   -->
