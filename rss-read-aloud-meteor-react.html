@@ -2,9 +2,7 @@
   <meta charset="utf-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1" >
   <title>RSS Feed Read-Aloud</title>
-<!-- TODO: need to copy this over
-  <link rel="import" href="js/vendors/bower_components/voice-elements/dist/voice-player.html">
--->
+	<link rel="import" href="bower_components/voice-elements/dist/voice-player.html">
   <link href='https://fonts.googleapis.com/css?family=Neuton' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 </head>
@@ -57,7 +55,7 @@
       <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <strong>About</strong><br/>
         This application came about because I wanted to be able to catch up on news while eating but do it in a hands-free mode.<br>
-        Thanks to <a href="http://apigee.com/docs/" target="_blank">apigee edge</a> for their API services and to <a href="http://zenorocha.github.io/voice-elements/" target="_blank">Zeno Rocha's voice-elements</a>.
+        Thanks to <a href="http://zenorocha.github.io/voice-elements/" target="_blank">Zeno Rocha's voice-elements</a>.
         2015<br>
         With <i class="fa fa-heart"></i> from <a href="http://www.carolchung.com" target="_blank">TuskTusk Dev</a>.
       </div>
@@ -66,10 +64,8 @@
 <!--TODO test whether single page can handle multiple voice-player elements and whether this is a good practice -->
 <!--  <voice-player id="hacker-news"></voice-player>-->
 <!-- TODO try to get the hacker news story indexes in a main.js iife to help with the nested ajax timing issue -->
-<!-- TODO: need to copy over
-  <script src="js/vendors/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-  <script src="js/main.js"></script>
--->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script src="client/main.js"></script>
   <!-- comment out because of nested ajax timing issue
   <script src="js/hackerNewsBundle.js"></script>
   -->

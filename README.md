@@ -8,6 +8,7 @@
 * meteor add fortawesome:fontawesome
 * meteor add http
 * meteor add mrt:cheerio
+* meteor add ecwyne:voice-elements
 
 ## Caveat
 * Audio playback is only supported on Chrome currently.
