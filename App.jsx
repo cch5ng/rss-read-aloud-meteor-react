@@ -45,7 +45,7 @@ var FeedList = React.createClass({
 		console.log('props.data: ' + this.props.data);
 		var feedNodes = this.props.data.map(function(feed) {
 			return (
-				<Feed key={feed.id} title={feed.title} description={feed.description} pubDate={feed.pubDate} link={feed.link} >
+				<Feed key={feed._id} title={feed.title} description={feed.description} pubDate={feed.pubDate} link={feed.link} >
 				</Feed>
 			);
 		});
