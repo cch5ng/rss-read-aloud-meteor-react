@@ -67,16 +67,16 @@ if (Meteor.isServer) {
 							//this is assuming that older stories are cycled out by age
 						$('item').each(function(idx, element) {
 							var feedObj = {};
+							feedObj.link = $(this).find('link').text();//.contents();
 							feedObj._id = prefix + feedObj.link;
 
-							if (!Nprfeeds.findOne(feedObj._id)) {
+							//if (!Nprfeeds.findOne(feedObj._id)) {
 								feedObj.insertOrder = counter;
-								feedObj.link = $(this).find('link').text();//.contents();
 								feedObj.title = $(this).find('title').text();//.contents();
 								feedObj.description = $(this).find('description').text();//.contents();
 								newFeedsAr.push(feedObj);
 								counter++;
-							}
+							//}
 						});
 						console.log('length newFeedsAr: ' + newFeedsAr.length);
 
@@ -90,6 +90,7 @@ if (Meteor.isServer) {
 								title: feed.title,
 								description: feed.description
 							});
+							console.log('update a feed');
 						});
 					} //end else
 
@@ -105,7 +106,7 @@ if (Meteor.isServer) {
 
 		Meteor.setInterval(function() {
 			getNprFeeds();
-			Session.set('nprFeedsAr', nprFeedsAr);
-		}, 1000 * 60 * 10); //1000 * 60 * 15
+			//Session.set('nprFeedsAr', nprFeedsAr);
+		}, 1000 * 60 * 15); //1000 * 60 * 15
 	});
 }
