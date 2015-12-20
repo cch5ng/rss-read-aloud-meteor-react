@@ -5,20 +5,17 @@ App = React.createClass({
 
 	getMeteorData() {
 		return {
-			nprfeeds: Nprfeeds.find({}).fetch()
+			nprfeeds: Nprfeeds.find({}, {insertOrder: 1}).fetch()
 		};
 	},
 
 	renderNprFeeds() {
-		return this.data.nprfeeds;//.map((nprfeed) => {
-			//return <Feed key={nprfeed._id} feed={nprfeed}></Feed>
-			//);
-		//}) 
+		return this.data.nprfeeds; 
 	},
 
 	render: function() {
 		return (<div className="nprFeed container">
-					{/*<button className="btnNpr">Play</button>*/}
+					{}
 					<div className="row">
 						<h3 className='h3-npr'>NPR News Feed {/*this.state.data[0].link ? 'NPR News Feed' : ''*/}</h3>
 					</div>
@@ -34,7 +31,6 @@ var Feed = React.createClass({
 			<div className="col-xs-12 col-sm-6 col-md-4 feed">
 				<h3><a href={this.props.link} target="_blank">{this.props.title}</a></h3>
 				<p>{this.props.description}</p>
-				{/*<p>{this.props.pubDate}</p>*/}
 			</div>
 			);
 	}
