@@ -167,7 +167,7 @@ if (Meteor.isServer) {
 						//iterate over newFeedsAr
 							//update the record in collection in order by insertOrder
 							//this is assuming that older stories are cycled out by age
-						$('item').each(function(idx, element) {
+						$1('item').each(function(idx, element) {
 							var feedObj = {};
 							feedObj.link = $(this).find('link').text();//.contents();
 							feedObj._id = prefix + feedObj.link;

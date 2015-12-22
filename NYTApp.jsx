@@ -1,4 +1,4 @@
-//App.jsx
+//NYTApp.jsx
 
 NYTApp = React.createClass({
 	mixins: [ReactMeteorData],
