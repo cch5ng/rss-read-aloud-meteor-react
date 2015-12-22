@@ -52,9 +52,9 @@ h2 {
 
 /* feeds */
 
-.h3-npr, .h3-bbc, .h3-yahoo {
-	text-align: center;
-	padding: 8px 0;
+.h3-npr, .h3-bbc, .h3-yahoo, .h3-nyt {
+	/*text-align: center;*/
+	padding: 5px 0 0 15px;
 }
 
 .h3-npr {
@@ -65,7 +65,7 @@ h2 {
 	background-color: #326cb9; /*#0048a8;*/
 }
 
-.h3-yahoo {
+.h3-nyt {
 	background-color: #00a860;
 }
 

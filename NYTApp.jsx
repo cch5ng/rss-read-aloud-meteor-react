@@ -1,25 +1,25 @@
 //App.jsx
 
-App = React.createClass({
+NYTApp = React.createClass({
 	mixins: [ReactMeteorData],
 
 	getMeteorData() {
 		return {
-			nprfeeds: Nprfeeds.find({}, {insertOrder: 1}).fetch()
+			nytfeeds: Nytfeeds.find({}, {insertOrder: 1}).fetch()
 		};
 	},
 
-	renderNprFeeds() {
-		return this.data.nprfeeds; 
+	renderNytFeeds() {
+		return this.data.nytfeeds; 
 	},
 
 	render: function() {
-		return (<div className="nprFeed container">
+		return (<div className="nytFeed container">
 					{}
 					<div className="row">
-						<h3 className='h3-npr'>NPR News Feed {/*this.state.data[0].link ? 'NPR News Feed' : ''*/}</h3>
+						<h3 className='h3-nyt'>New York Times News Feed {/*this.state.data[0].link ? 'NPR News Feed' : ''*/}</h3>
 					</div>
-					<FeedList data={this.data.nprfeeds} />
+					<FeedList data={this.data.nytfeeds} />
 				</div>
 		);
 	}

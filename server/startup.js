@@ -2,6 +2,7 @@
 if (Meteor.isServer) {
 	Meteor.startup(function() {
 		var nprFeedsAr = [];
+		var nytFeedsAr = [];
 
 		//helper function
 		function buildFeedObj() {
@@ -99,14 +100,117 @@ if (Meteor.isServer) {
 				} else {
 					console.log('error: ' + error);
 				}
+
+			});
+		}
+
+//TODO abstract this logic with the previous helper
+		//helper function
+		function getNytFeeds() {
+			var url = 'http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml';
+			var result = HTTP.call("GET", url, function(error, result) {
+				if (!error) {
+					nytFeedsAr = [];
+	//this part works
+					console.log('type of: ' + typeof result.content);
+//TEST see if this prevents confusion between npr and nyt feeds
+					$1 = cheerio.load(result.content, {
+						normalizeWhitespace: true,
+						xmlMode: true
+					});
+					var prefix = 'nyt';
+
+					//case collection is empty
+					if (!Nytfeeds.findOne()) {
+						$1('item').each(function(idx, element) {
+								var feedObj = {};
+								var feedId;
+								var descStr,
+									descAr = [];
+								// feedObj.pubDate = $(this).find('pubDate').text();
+								feedObj.insertOrder = idx;
+								//console.log('insertOrder: ' + feedObj.insertOrder);
+								feedObj.link = $1(this).find('link').text();//.contents();
+								feedObj._id = prefix + feedObj.link;
+								//console.log('id: ' + feedObj._id);
+								//console.log('type of id: ' + typeof feedObj._id);
+								feedObj.title = $1(this).find('title').text();//.contents();
+								//console.log('title: ' + feedObj.title);
+								descStr = $1(this).find('description').text();
+								descAr = descStr.split('<br clear=');
+								feedObj.description = descAr[0];//.contents();
+								//console.log('description: ' + feedObj.description);
+								nytFeedsAr.push(feedObj);
+
+								//insert each feed to collection
+								Nytfeeds.insert(feedObj, function(er, id) {
+									console.log('id: ' + id);
+									if (!er) {
+										console.log('insert');
+										console.log('size NytFeeds collection: ' + Nytfeeds.find().count());
+									} else {
+										console.log('error: ' + er);
+									}
+								});
+
+						});
+					} else {
+					//case collection is populated
+						var newFeedsCount;
+						var newFeedsAr = [];
+						var counter = 0;
+						//for each feed check if its id has match in collection
+							//if true, skip
+							//if false, add to newFeedsAr
+						//iterate over newFeedsAr
+							//update the record in collection in order by insertOrder
+							//this is assuming that older stories are cycled out by age
+						$('item').each(function(idx, element) {
+							var feedObj = {};
+							feedObj.link = $(this).find('link').text();//.contents();
+							feedObj._id = prefix + feedObj.link;
+
+							//if (!Nprfeeds.findOne(feedObj._id)) {
+								feedObj.insertOrder = counter;
+								feedObj.title = $(this).find('title').text();//.contents();
+								feedObj.description = $(this).find('description').text();//.contents();
+								newFeedsAr.push(feedObj);
+								counter++;
+							//}
+						});
+						console.log('length newFeedsAr: ' + newFeedsAr.length);
+
+						//update the oldest collection items with the new feeds
+						newFeedsAr.forEach(function(feed) {
+							Nytfeeds.remove({insertOrder: feed.insertOrder});
+							Nytfeeds.insert({
+								_id: feed._id,
+								insertOrder: feed.insertOrder,
+								link: feed.link,
+								title: feed.title,
+								description: feed.description
+							});
+							console.log('update a feed');
+						});
+					} //end else
+
+					console.log('length nytFeedsAr: ' + nytFeedsAr.length);
+					console.log('size NytFeeds collection: ' + Nytfeeds.find().count());
+				} else {
+					console.log('error: ' + error);
+				}
 			});
 		}
 
 		getNprFeeds();
+		getNytFeeds();
 
 		Meteor.setInterval(function() {
 			getNprFeeds();
 			//Session.set('nprFeedsAr', nprFeedsAr);
 		}, 1000 * 60 * 15); //1000 * 60 * 15
-	});
+
+//TODO populate collection with hackernews content
+
+	});//end Meteor.startup()
 }

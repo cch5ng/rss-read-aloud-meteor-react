@@ -7,5 +7,12 @@ if (Meteor.isClient) {
        <App />,
        document.getElementById('npr')
      );
+
+     ReactDOM.render(
+//try to set as data instead of url
+       <NYTApp />,
+       document.getElementById('nytimes')
+     );
+
   });
 }
