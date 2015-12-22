@@ -114,6 +114,7 @@ if (Meteor.isServer) {
 	//this part works
 					console.log('type of: ' + typeof result.content);
 //TEST see if this prevents confusion between npr and nyt feeds
+					//using $1 var to differentiate between that used for npr feed
 					$1 = cheerio.load(result.content, {
 						normalizeWhitespace: true,
 						xmlMode: true
@@ -136,6 +137,7 @@ if (Meteor.isServer) {
 								//console.log('type of id: ' + typeof feedObj._id);
 								feedObj.title = $1(this).find('title').text();//.contents();
 								//console.log('title: ' + feedObj.title);
+								//separating feed description text from the html used to display ads
 								descStr = $1(this).find('description').text();
 								descAr = descStr.split('<br clear=');
 								feedObj.description = descAr[0];//.contents();
@@ -205,10 +207,10 @@ if (Meteor.isServer) {
 		getNprFeeds();
 		getNytFeeds();
 
-		Meteor.setInterval(function() {
-			getNprFeeds();
+		//Meteor.setInterval(function() {
+		//	getNprFeeds();
 			//Session.set('nprFeedsAr', nprFeedsAr);
-		}, 1000 * 60 * 15); //1000 * 60 * 15
+		//}, 1000 * 60 * 15); //1000 * 60 * 15
 
 //TODO populate collection with hackernews content
 
