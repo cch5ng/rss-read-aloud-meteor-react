@@ -205,10 +205,11 @@ if (Meteor.isServer) {
 		getNprFeeds();
 		getNytFeeds();
 
-		//Meteor.setInterval(function() {
-		//	getNprFeeds();
+		Meteor.setInterval(function() {
+			getNprFeeds();
+			getNytFeeds();
 			//Session.set('nprFeedsAr', nprFeedsAr);
-		//}, 1000 * 60 * 15); //1000 * 60 * 15
+		}, 1000 * 60 * 15); //1000 * 60 * 15
 
 //TODO populate collection with hackernews content
 
