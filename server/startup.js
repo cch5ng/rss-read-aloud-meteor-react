@@ -160,6 +160,7 @@ if (Meteor.isServer) {
 					//case collection is populated
 						var newFeedsCount;
 						var newFeedsAr = [];
+						var counter = 0;
 						//for each feed check if its id has match in collection
 							//if true, skip
 							//if false, add to newFeedsAr

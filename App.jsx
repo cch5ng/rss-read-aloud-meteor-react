@@ -5,7 +5,7 @@ App = React.createClass({
 
 	getMeteorData() {
 		return {
-			nprfeeds: Nprfeeds.find({}, {insertOrder: 1}).fetch()
+			nprfeeds: Nprfeeds.find({}, {insertOrder: 1}).fetch() 
 		};
 	},
 
