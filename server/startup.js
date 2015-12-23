@@ -160,7 +160,6 @@ if (Meteor.isServer) {
 					//case collection is populated
 						var newFeedsCount;
 						var newFeedsAr = [];
-						var counter = 0;
 						//for each feed check if its id has match in collection
 							//if true, skip
 							//if false, add to newFeedsAr
@@ -172,13 +171,12 @@ if (Meteor.isServer) {
 							feedObj.link = $(this).find('link').text();//.contents();
 							feedObj._id = prefix + feedObj.link;
 
-							//if (!Nprfeeds.findOne(feedObj._id)) {
-								feedObj.insertOrder = counter;
-								feedObj.title = $(this).find('title').text();//.contents();
-								feedObj.description = $(this).find('description').text();//.contents();
-								newFeedsAr.push(feedObj);
-								counter++;
-							//}
+							feedObj.insertOrder = counter;
+							feedObj.title = $(this).find('title').text();//.contents();
+							descStr = $1(this).find('description').text();
+							descAr = descStr.split('<br clear=');
+							feedObj.description = descAr[0];//.contents();
+							newFeedsAr.push(feedObj);
 						});
 						console.log('length newFeedsAr: ' + newFeedsAr.length);
 
