@@ -2,7 +2,7 @@ Meteor.startup(function() {
   //TODO if I wait for DOMContentLoaded, this logic never appears to run but if I disable this check,
   //element functions from voice elements/polymer never appear to get recognized
   //document.addEventListener('DOMContentLoaded', function() {
-    var element = document.querySelector('#npr'); //('voice-player');
+    var element = document.querySelector('#player'); //('voice-player');
   //TODO how to handle this for multiple feeds
     var counter = 0;
     var feed;
