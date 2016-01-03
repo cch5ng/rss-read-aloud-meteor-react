@@ -2,11 +2,60 @@
 if (Meteor.isServer) {
 	Meteor.startup(function() {
 		var nprFeedsAr = [];
+		//nytimes feeds array
 		var nytFeedsAr = [];
+		//hacker news
+		var hnIndexAr = [];
+		var hnFeedsAr = [];
 
 		//helper function
 		function buildFeedObj() {
 			var feedObj = {};
+
+		}
+
+		//helper; need to get list of indices for popular stories, per hacker news api (no traditional rss)
+		function getHackerNewsIndices() {
+			var url = 'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty';
+			var result = HTTP.call("GET", url, function(error, result) {
+				if (!error) {
+					//converting string to array
+					var tempAr = result.content.split(', ');
+					console.log('length tempAr: ' + tempAr.length);
+					console.log('type tempAr: ' + typeof tempAr);
+					console.log('tempAr[0]: ' + tempAr[0]);
+					console.log('tempAr[tempAr.length - 1]: ' + tempAr[tempAr.length - 1]);
+					console.log('length tempAr[0]: ' + tempAr[0].length);
+
+					//reformating first and last elements
+					tempAr[0] = tempAr[0].slice(2);
+					console.log('tempAr[0]: ' + tempAr[0]);
+					console.log('length tempAr[0]: ' + tempAr[0].length);
+
+					tempAr[tempAr.length - 1] = tempAr[tempAr.length - 1].slice(0, 8);
+					console.log('tempAr[tempAr.length - 1]: ' + tempAr[tempAr.length - 1]);
+					console.log('length tempAr[0]: ' + tempAr[0].length);
+
+					//hnIndexAr = result.content;
+					for (var i = 0; i < 30; i++) {
+						hnIndexAr.push(tempAr[i]);
+
+					}
+
+					//console.log('result: ' + result);
+					//console.log('result content: ' + result.content);
+					//console.log('type of: ' + typeof result.content);
+					//console.log('length content: ' + result.content.length);
+					//console.log('type of: ' + typeof result);
+					console.log('length hnIndexAr: ' + hnIndexAr.length);
+					console.log('hnIndexAr: ' + hnIndexAr);
+				} else {
+					console.log('error: ' + error);
+				}
+			});
+		}
+
+		function getHackerNewsFeeds() {
 
 		}
 
@@ -169,31 +218,32 @@ if (Meteor.isServer) {
 							//this is assuming that older stories are cycled out by age
 						$1('item').each(function(idx, element) {
 							var feedObj = {};
-							feedObj.link = $(this).find('link').text();//.contents();
+							feedObj.link = $1(this).find('link').text();//.contents();
 							feedObj._id = prefix + feedObj.link;
 
 							feedObj.insertOrder = counter;
-							feedObj.title = $(this).find('title').text();//.contents();
+							feedObj.title = $1(this).find('title').text();//.contents();
 							descStr = $1(this).find('description').text();
 							descAr = descStr.split('<br clear=');
 							feedObj.description = descAr[0];//.contents();
 							newFeedsAr.push(feedObj);
 						});
 						console.log('length newFeedsAr: ' + newFeedsAr.length);
-
-						//update the oldest collection items with the new feeds
-						newFeedsAr.forEach(function(feed) {
-							Nytfeeds.remove({insertOrder: feed.insertOrder});
-							Nytfeeds.insert({
-								_id: feed._id,
-								insertOrder: feed.insertOrder,
-								link: feed.link,
-								title: feed.title,
-								description: feed.description
+//TEST fix for update error
+						//clear old feeds from collection
+						Nytfeeds.remove({}, function() {
+							newFeedsAr.forEach(function(feed) {
+								Nytfeeds.insert({
+									_id: feed._id,
+									insertOrder: feed.insertOrder,
+									link: feed.link,
+									title: feed.title,
+									description: feed.description
+								});
+								console.log('update a feed');
 							});
-							console.log('update a feed');
 						});
-					} //end else
+					}
 
 					console.log('length nytFeedsAr: ' + nytFeedsAr.length);
 					console.log('size NytFeeds collection: ' + Nytfeeds.find().count());
@@ -203,6 +253,7 @@ if (Meteor.isServer) {
 			});
 		}
 
+		getHackerNewsIndices();
 		getNprFeeds();
 		getNytFeeds();
 
