@@ -16,7 +16,7 @@ if (Meteor.isServer) {
 
 		//security
 		BrowserPolicy.content.allowFontDataUrl();
-		BrowserPolicy.content.allowMediaOrigin('*.meteor.com');
+		//BrowserPolicy.content.allowMediaOrigin('*.meteor.com');
 		BrowserPolicy.content.allowMediaSameOrigin();
 		BrowserPolicy.content.allowOriginForAll('*.meteor.com');
 		BrowserPolicy.content.allowOriginForAll('fonts.googleapis.com');
