@@ -2,13 +2,15 @@
 
 ## (in works) Application to read or listen to rss news feed headlines. (Meteor/React)
 
-## Dependencies
-* meteor add twbs:bootstrap
-* meteor add react
-* meteor add fortawesome:fontawesome
-* meteor add http
-* meteor add mrt:cheerio
-* meteor add ecwyne:voice-elements
+## Package Dependencies
+* twbs:bootstrap
+* react
+* fortawesome:fontawesome
+* http
+* mrt:cheerio
+* ecwyne:voice-elements
+* webapp
+* browser-policy
 
 ## Known Issues
 * Audio playback is only working intermittently and is not reliable.
