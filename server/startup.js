@@ -1,6 +1,10 @@
 //startup.js
+
+var connectHandler = WebApp.connectHandlers; // get meteor-core's connect-implementation
+
 if (Meteor.isServer) {
 	Meteor.startup(function() {
+		//VARS
 		//frequency that feeds will be updated (minutes)
 		var updateFrequencyMin = 20;
 		var nprFeedsAr = [];
@@ -9,6 +13,24 @@ if (Meteor.isServer) {
 		//hacker news
 		var hnIndexAr = [];
 		var hnFeedsAr = [];
+
+		//security
+		BrowserPolicy.content.allowFontDataUrl();
+		BrowserPolicy.content.allowMediaOrigin('*.meteor.com');
+		BrowserPolicy.content.allowMediaSameOrigin();
+		BrowserPolicy.content.allowOriginForAll('*.meteor.com');
+		BrowserPolicy.content.allowOriginForAll('fonts.googleapis.com');
+		BrowserPolicy.content.allowOriginForAll('https://maxcdn.bootstrapcdn.com');
+		BrowserPolicy.content.allowOriginForAll('fonts.gstatic.com');
+		BrowserPolicy.content.allowConnectOrigin("*.meteor.com");
+
+		// Listen to incoming HTTP requests, can only be used on the server
+		connectHandler.use("/public", function(req, res, next) {
+			res.setHeader('Access-Control-Allow-Origin', '*');
+			res.setHeader("Access-Control-Allow-Methods", "GET");
+			res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-Requested-With, Origin');
+			//return next();
+		});
 
 		//helper function
 		function buildFeedObj() {
