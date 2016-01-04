@@ -1,6 +1,7 @@
 # RSS Plus (Meteor/React)
 
 ## (in works) Application to read or listen to rss news feed headlines. (Meteor/React)
+* http://chc_rss_plus.meteor.com/
 
 ## Package Dependencies
 * twbs:bootstrap
