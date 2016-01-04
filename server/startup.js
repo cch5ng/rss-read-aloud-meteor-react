@@ -1,6 +1,7 @@
 //startup.js
 if (Meteor.isServer) {
 	Meteor.startup(function() {
+		hackerNewsIndices = [];
 		var nprFeedsAr = [];
 		//nytimes feeds array
 		var nytFeedsAr = [];
@@ -42,6 +43,8 @@ if (Meteor.isServer) {
 
 					}
 
+					getHackerNewsFeeds(hnIndexAr);
+
 					//console.log('result: ' + result);
 					//console.log('result content: ' + result.content);
 					//console.log('type of: ' + typeof result.content);
@@ -55,7 +58,52 @@ if (Meteor.isServer) {
 			});
 		}
 
-		function getHackerNewsFeeds() {
+		//isolate repeated http get requests to hacker news api
+		function getHackerNewsFeed(feedIdx) {
+			var url = 'https://hacker-news.firebaseio.com/v0/item/' + feedIdx + '.json?print=pretty';
+			var result = HTTP.call("GET", url, function(error, result) {
+				if (!error) {
+					console.log('type of HNews feed: ' + typeof result.data);
+					console.log('HNews feed contents: ' + result.data);
+
+					// $ = cheerio.load(result.content, {
+					// 	normalizeWhitespace: true//,
+					// 	//xmlMode: true
+					// });
+//					var prefix = 'npr';
+
+					//case collection is empty
+					if (!Hnfeeds.findOne()) {
+
+					} else {
+					//case collection is populated
+
+					} //end else
+
+					// console.log('length nprFeedsAr: ' + nprFeedsAr.length);
+					// console.log('size NprFeeds collection: ' + Nprfeeds.find().count());
+				} else {
+					console.log('error: ' + error);
+				}
+
+			});
+		}
+
+		function getHackerNewsFeeds(feedsArray) {
+//pseudocode
+//if session var, hackerNewsIndices is set
+	//for each index, do http get
+		//add result to hnFeedsAr list
+		//insert to Hnfeeds collection
+//update the react render code (need create HNewsApp.jsx)
+			//var hnIndices = Session.get('hackerNewsIndices');
+			if (feedsArray.length > 0) {
+				getHackerNewsFeed(feedsArray[0]);
+//TODO
+				//hackerNewsIndices.forEach(function(idx) {
+
+				//});
+			}
 
 		}
 
@@ -256,6 +304,7 @@ if (Meteor.isServer) {
 		getHackerNewsIndices();
 		getNprFeeds();
 		getNytFeeds();
+		//getHackerNewsFeeds();
 
 		Meteor.setInterval(function() {
 			getNprFeeds();
