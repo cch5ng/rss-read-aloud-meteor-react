@@ -25,7 +25,7 @@ if (Meteor.isServer) {
 		BrowserPolicy.content.allowConnectOrigin("*.meteor.com");
 
 		// Listen to incoming HTTP requests, can only be used on the server
-		connectHandler.use("/public", function(req, res, next) {
+		connectHandler.use('/public', function(req, res, next) {
 			res.setHeader('Access-Control-Allow-Origin', '*');
 			res.setHeader("Access-Control-Allow-Methods", "GET");
 			res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-Requested-With, Origin');
