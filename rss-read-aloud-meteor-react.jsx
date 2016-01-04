@@ -14,5 +14,11 @@ if (Meteor.isClient) {
        document.getElementById('nytimes')
      );
 
+     ReactDOM.render(
+//try to set as data instead of url
+       <HNApp />,
+       document.getElementById('hackernews')
+     );
+
   });
 }

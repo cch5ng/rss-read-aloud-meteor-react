@@ -52,7 +52,7 @@ h2 {
 
 /* feeds */
 
-.h3-npr, .h3-bbc, .h3-yahoo, .h3-nyt {
+.h3-npr, .h3-bbc, .h3-yahoo, .h3-nyt, .h3-hn {
 	/*text-align: center;*/
 	padding: 5px 0 0 15px;
 }
@@ -61,7 +61,7 @@ h2 {
 	background-color: #009ca8;
 }
 
-.h3-bbc {
+.h3-bbc, .h3-hn {
 	background-color: #326cb9; /*#0048a8;*/
 }
 
