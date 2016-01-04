@@ -65,16 +65,12 @@ if (Meteor.isServer) {
 				if (!error) {
 					console.log('type of HNews feed: ' + typeof result.data);
 					console.log('HNews feed contents: ' + result.data);
-
-					// $ = cheerio.load(result.content, {
-					// 	normalizeWhitespace: true//,
-					// 	//xmlMode: true
-					// });
-//					var prefix = 'npr';
+					console.log('feed id HNews: ' + result.data.id);
 
 					//case collection is empty
-					if (!Hnfeeds.findOne()) {
-
+					if (!Hnfeeds.findOne(result.data.id)) {
+						var feedObj = {_id: result.data.id.toString(), link: result.data.url, title: result.data.title, description: result.data.type, pubdate: result.data.time};
+						Hnfeeds.insert(feedObj);
 					} else {
 					//case collection is populated
 
@@ -98,11 +94,9 @@ if (Meteor.isServer) {
 //update the react render code (need create HNewsApp.jsx)
 			//var hnIndices = Session.get('hackerNewsIndices');
 			if (feedsArray.length > 0) {
-				getHackerNewsFeed(feedsArray[0]);
-//TODO
-				//hackerNewsIndices.forEach(function(idx) {
-
-				//});
+				feedsArray.forEach(function(feedIdx) {
+					getHackerNewsFeed(feedIdx);
+				});
 			}
 
 		}
