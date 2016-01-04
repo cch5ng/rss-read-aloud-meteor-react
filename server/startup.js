@@ -1,7 +1,8 @@
 //startup.js
 if (Meteor.isServer) {
 	Meteor.startup(function() {
-		hackerNewsIndices = [];
+		//frequency that feeds will be updated (minutes)
+		var updateFrequencyMin = 20;
 		var nprFeedsAr = [];
 		//nytimes feeds array
 		var nytFeedsAr = [];
@@ -20,6 +21,9 @@ if (Meteor.isServer) {
 			var url = 'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty';
 			var result = HTTP.call("GET", url, function(error, result) {
 				if (!error) {
+					//clear previous list to avoid inserting duplicate records to mongo
+					hnIndexAr = [];
+//TODO think this can be replaced using result.data rather than result.content
 					//converting string to array
 					var tempAr = result.content.split(', ');
 					console.log('length tempAr: ' + tempAr.length);
@@ -43,7 +47,12 @@ if (Meteor.isServer) {
 
 					}
 
-					getHackerNewsFeeds(hnIndexAr);
+					if (Hnfeeds.findOne()) {
+//TEST if callback is ok here with the param explicit
+						Hnfeeds.remove({}, getHackerNewsFeeds(hnIndexAr));
+					} else {
+						getHackerNewsFeeds(hnIndexAr);
+					}
 
 					//console.log('result: ' + result);
 					//console.log('result content: ' + result.content);
@@ -93,6 +102,7 @@ if (Meteor.isServer) {
 		//insert to Hnfeeds collection
 //update the react render code (need create HNewsApp.jsx)
 			//var hnIndices = Session.get('hackerNewsIndices');
+
 			if (feedsArray.length > 0) {
 				feedsArray.forEach(function(feedIdx) {
 					getHackerNewsFeed(feedIdx);
@@ -303,10 +313,8 @@ if (Meteor.isServer) {
 		Meteor.setInterval(function() {
 			getNprFeeds();
 			getNytFeeds();
-			//Session.set('nprFeedsAr', nprFeedsAr);
-		}, 1000 * 60 * 15); //1000 * 60 * 15
-
-//TODO populate collection with hackernews content
+			getHackerNewsIndices();
+		}, 1000 * 60 * updateFrequencyMin);
 
 	});//end Meteor.startup()
 }
