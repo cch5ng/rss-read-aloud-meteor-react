@@ -19,7 +19,7 @@ HNApp = React.createClass({
 //api requests have returned
 
 		return (<div className="hn-feeds container">
-					<div class="row">
+					<div className="row">
 						{/*<button className="btnHackerNews">Play</button>*/}
 						<h3 className='h3-hn'>Hacker News Stories {/*this.state.data[0].link ? 'NPR News Feed' : ''*/}</h3>
 					</div>
