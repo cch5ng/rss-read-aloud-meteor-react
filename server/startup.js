@@ -6,7 +6,7 @@ if (Meteor.isServer) {
 	Meteor.startup(function() {
 		//VARS
 		//frequency that feeds will be updated (minutes)
-		var updateFrequencyMin = 20;
+		var updateFrequencyMin = 60;
 		var nprFeedsAr = [];
 		//nytimes feeds array
 		var nytFeedsAr = [];
