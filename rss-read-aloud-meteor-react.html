@@ -51,6 +51,7 @@
   <div id="nytimes"></div>
   <div id="hackernews"></div>
   <!-- TODO:
+  nice to have example of wordpress blog rss feed
   <div id="bbc"></div>
   <div id="yahoo"></div>
 	-->
@@ -63,28 +64,12 @@
         <!--commenting out since the plan is to move away from voice elements audio player
         <br>
         Thanks to <a href="http://zenorocha.github.io/voice-elements/" target="_blank">Zeno Rocha's voice-elements</a>.
-        2015<br>-->
+        2015-->
+        <br>
         With <i class="fa fa-heart"></i> from <a href="http://www.carolchung.com" target="_blank">TuskTusk Dev</a>.
       </div>
     </div>
   </footer>
-<!--TODO test whether single page can handle multiple voice-player elements and whether this is a good practice -->
-<!--  <voice-player id="hacker-news"></voice-player>-->
-<!-- TODO try to get the hacker news story indexes in a main.js iife to help with the nested ajax timing issue -->
+
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-<!--  <script src="main.js"></script>-->
-  <!-- comment out because of nested ajax timing issue
-  <script src="js/hackerNewsBundle.js"></script>
-  -->
-<!-- TODO: jsx transpiling should be handled on the fly by meteor
-  <script src="js/nprBundle.js"></script>
-  <script src="js/bbcBundle.js"></script>
--->
-<!-- TODO tshoot -->
-  <!--<script src="js/yahooBundle.js"></script>-->
-  <!--<script src="js/nyTimesBundle.js"></script>-->
 </body>
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
