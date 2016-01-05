@@ -46,27 +46,17 @@ if (Meteor.isServer) {
 					//clear previous list to avoid inserting duplicate records to mongo
 					hnIndexAr = [];
 //TODO think this can be replaced using result.data rather than result.content
-					//converting string to array
-					var tempAr = result.content.split(', ');
-					console.log('length tempAr: ' + tempAr.length);
-					console.log('type tempAr: ' + typeof tempAr);
-					console.log('tempAr[0]: ' + tempAr[0]);
-					console.log('tempAr[tempAr.length - 1]: ' + tempAr[tempAr.length - 1]);
-					console.log('length tempAr[0]: ' + tempAr[0].length);
-
-					//reformating first and last elements
-					tempAr[0] = tempAr[0].slice(2);
-					console.log('tempAr[0]: ' + tempAr[0]);
-					console.log('length tempAr[0]: ' + tempAr[0].length);
-
-					tempAr[tempAr.length - 1] = tempAr[tempAr.length - 1].slice(0, 8);
-					console.log('tempAr[tempAr.length - 1]: ' + tempAr[tempAr.length - 1]);
-					console.log('length tempAr[0]: ' + tempAr[0].length);
+					var tempAr = result.data;
+					// console.log('type of tempAr: ' + typeof tempAr);
+					// console.log('tempAr: ' + tempAr);
+					// console.log('tempAr[0]: ' + tempAr[0]);
+					// console.log('typeof tempAr[0]: ' + typeof tempAr[0]);
+					// console.log('tempAr[tempAr.length - 1]: ' + tempAr[tempAr.length - 1]);
+					// console.log('typeof tempAr[tempAr.length - 1]: ' + typeof tempAr[tempAr.length - 1]);
 
 					//hnIndexAr = result.content;
 					for (var i = 0; i < 30; i++) {
 						hnIndexAr.push(tempAr[i]);
-
 					}
 
 					if (Hnfeeds.findOne()) {
@@ -76,13 +66,8 @@ if (Meteor.isServer) {
 						getHackerNewsFeeds(hnIndexAr);
 					}
 
-					//console.log('result: ' + result);
-					//console.log('result content: ' + result.content);
-					//console.log('type of: ' + typeof result.content);
-					//console.log('length content: ' + result.content.length);
-					//console.log('type of: ' + typeof result);
-					console.log('length hnIndexAr: ' + hnIndexAr.length);
-					console.log('hnIndexAr: ' + hnIndexAr);
+					// console.log('length hnIndexAr: ' + hnIndexAr.length);
+					// console.log('hnIndexAr: ' + hnIndexAr);
 				} else {
 					console.log('error: ' + error);
 				}
@@ -94,9 +79,9 @@ if (Meteor.isServer) {
 			var url = 'https://hacker-news.firebaseio.com/v0/item/' + feedIdx + '.json?print=pretty';
 			var result = HTTP.call("GET", url, function(error, result) {
 				if (!error) {
-					console.log('type of HNews feed: ' + typeof result.data);
-					console.log('HNews feed contents: ' + result.data);
-					console.log('feed id HNews: ' + result.data.id);
+					// console.log('type of HNews feed: ' + typeof result.data);
+					// console.log('HNews feed contents: ' + result.data);
+					// console.log('feed id HNews: ' + result.data.id);
 
 					//case collection is empty
 					if (!Hnfeeds.findOne(result.data.id)) {
@@ -117,20 +102,11 @@ if (Meteor.isServer) {
 		}
 
 		function getHackerNewsFeeds(feedsArray) {
-//pseudocode
-//if session var, hackerNewsIndices is set
-	//for each index, do http get
-		//add result to hnFeedsAr list
-		//insert to Hnfeeds collection
-//update the react render code (need create HNewsApp.jsx)
-			//var hnIndices = Session.get('hackerNewsIndices');
-
 			if (feedsArray.length > 0) {
 				feedsArray.forEach(function(feedIdx) {
 					getHackerNewsFeed(feedIdx);
 				});
 			}
-
 		}
 
 		//helper function
@@ -139,8 +115,7 @@ if (Meteor.isServer) {
 			var result = HTTP.call("GET", url, function(error, result) {
 				if (!error) {
 					nprFeedsAr = [];
-	//this part works
-					console.log('type of: ' + typeof result.content);
+					// console.log('type of: ' + typeof result.content);
 
 					$ = cheerio.load(result.content, {
 						normalizeWhitespace: true,
@@ -168,7 +143,7 @@ if (Meteor.isServer) {
 
 								//insert each feed to collection
 								Nprfeeds.insert(feedObj, function(er, id) {
-									console.log('id: ' + id);
+									// console.log('id: ' + id);
 									if (!er) {
 										console.log('insert');
 										console.log('size NprFeeds collection: ' + Nprfeeds.find().count());
@@ -202,7 +177,7 @@ if (Meteor.isServer) {
 								counter++;
 							//}
 						});
-						console.log('length newFeedsAr: ' + newFeedsAr.length);
+//						console.log('length newFeedsAr: ' + newFeedsAr.length);
 
 						//update the oldest collection items with the new feeds
 						newFeedsAr.forEach(function(feed) {
@@ -214,12 +189,12 @@ if (Meteor.isServer) {
 								title: feed.title,
 								description: feed.description
 							});
-							console.log('update a feed');
+//							console.log('update a feed');
 						});
 					} //end else
 
-					console.log('length nprFeedsAr: ' + nprFeedsAr.length);
-					console.log('size NprFeeds collection: ' + Nprfeeds.find().count());
+//					console.log('length nprFeedsAr: ' + nprFeedsAr.length);
+//					console.log('size NprFeeds collection: ' + Nprfeeds.find().count());
 				} else {
 					console.log('error: ' + error);
 				}
@@ -269,7 +244,7 @@ if (Meteor.isServer) {
 
 								//insert each feed to collection
 								Nytfeeds.insert(feedObj, function(er, id) {
-									console.log('id: ' + id);
+//									console.log('id: ' + id);
 									if (!er) {
 										console.log('insert');
 										console.log('size NytFeeds collection: ' + Nytfeeds.find().count());
@@ -302,8 +277,7 @@ if (Meteor.isServer) {
 							feedObj.description = descAr[0];//.contents();
 							newFeedsAr.push(feedObj);
 						});
-						console.log('length newFeedsAr: ' + newFeedsAr.length);
-//TEST fix for update error
+//						console.log('length newFeedsAr: ' + newFeedsAr.length);
 						//clear old feeds from collection
 						Nytfeeds.remove({}, function() {
 							newFeedsAr.forEach(function(feed) {
@@ -314,13 +288,13 @@ if (Meteor.isServer) {
 									title: feed.title,
 									description: feed.description
 								});
-								console.log('update a feed');
+//								console.log('update a feed');
 							});
 						});
 					}
 
-					console.log('length nytFeedsAr: ' + nytFeedsAr.length);
-					console.log('size NytFeeds collection: ' + Nytfeeds.find().count());
+					// console.log('length nytFeedsAr: ' + nytFeedsAr.length);
+					// console.log('size NytFeeds collection: ' + Nytfeeds.find().count());
 				} else {
 					console.log('error: ' + error);
 				}
@@ -330,7 +304,6 @@ if (Meteor.isServer) {
 		getHackerNewsIndices();
 		getNprFeeds();
 		getNytFeeds();
-		//getHackerNewsFeeds();
 
 		Meteor.setInterval(function() {
 			getNprFeeds();

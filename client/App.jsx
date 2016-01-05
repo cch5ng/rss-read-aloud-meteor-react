@@ -26,18 +26,6 @@ App = React.createClass({
 });
 
 //TODO move FeedList and Feed to separate components so they can be reused by other feed sources (hackernews, etc)
-
-var Feed = React.createClass({
-	render: function() {
-		return (
-			<div className="col-xs-12 col-sm-6 col-md-4 feed">
-				<h3><a href={this.props.link} target="_blank">{this.props.title}</a></h3>
-				<p>{this.props.description}</p>
-			</div>
-			);
-	}
-});
-
 var FeedList = React.createClass({
 	render: function() {
 		console.log('props.data: ' + this.props.data);
@@ -53,5 +41,16 @@ var FeedList = React.createClass({
 				{feedNodes}
 			</div>
 		);
+	}
+});
+
+var Feed = React.createClass({
+	render: function() {
+		return (
+			<div className="col-xs-12 col-sm-6 col-md-4 feed">
+				<h3><a href={this.props.link} target="_blank">{this.props.title}</a></h3>
+				<p>{this.props.description}</p>
+			</div>
+			);
 	}
 });
