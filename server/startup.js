@@ -306,6 +306,8 @@ if (Meteor.isServer) {
 		getNytFeeds();
 
 		Meteor.setInterval(function() {
+			//resetting audio player content so there isn't a conflict between old and new feeds
+			//window.speechSynthesis.cancel();
 			getNprFeeds();
 			getNytFeeds();
 			getHackerNewsIndices();
