@@ -14,7 +14,10 @@
 * browser-policy
 
 ## Known Issues
-* Audio playback is only working intermittently and is not reliable.
+* Audio playback works once for the current feeds on the page.
+* To replay feeds which have been previously loaded, the browser needs to be restarted.
+* To play feeds which are loaded after audio has played (to the end of the page), the browser needs to be restarted.
+  * I apologize and am working on a fix for this.
 
 ## Caveat
 * Audio playback is only supported on Chrome currently.
