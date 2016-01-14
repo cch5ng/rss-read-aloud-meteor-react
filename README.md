@@ -12,6 +12,9 @@
 * ecwyne:voice-elements
 * webapp
 * browser-policy
+* accounts-ui
+* accounts-password
+* accounts-github
 
 ## Known Issues
 * Audio playback works once for the current feeds on the page.

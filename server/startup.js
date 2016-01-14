@@ -305,13 +305,14 @@ if (Meteor.isServer) {
 		getNprFeeds();
 		getNytFeeds();
 
-		Meteor.setInterval(function() {
+//FIX/TEST replace auto polling for feed updates with manual refresh button
+		//Meteor.setInterval(function() {
 			//resetting audio player content so there isn't a conflict between old and new feeds
 			//window.speechSynthesis.cancel();
-			getNprFeeds();
-			getNytFeeds();
-			getHackerNewsIndices();
-		}, 1000 * 60 * updateFrequencyMin);
+		//	getNprFeeds();
+		//	getNytFeeds();
+		//	getHackerNewsIndices();
+		//}, 1000 * 60 * updateFrequencyMin);
 
 	});//end Meteor.startup()
 }
