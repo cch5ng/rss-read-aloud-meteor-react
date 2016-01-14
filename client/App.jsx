@@ -28,7 +28,7 @@ App = React.createClass({
 //TODO move FeedList and Feed to separate components so they can be reused by other feed sources (hackernews, etc)
 var FeedList = React.createClass({
 	render: function() {
-		console.log('props.data: ' + this.props.data);
+		//console.log('props.data: ' + this.props.data);
 		var feedNodes = this.props.data.map(function(feed) {
 			return (
 				<Feed key={feed._id} title={feed.title} description={feed.description} pubDate={feed.pubDate} link={feed.link} >
