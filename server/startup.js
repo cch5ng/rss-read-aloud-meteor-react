@@ -5,8 +5,6 @@ var connectHandler = WebApp.connectHandlers; // get meteor-core's connect-implem
 if (Meteor.isServer) {
 	Meteor.startup(function() {
 		//VARS
-		//frequency that feeds will be updated (minutes)
-		const updateFrequencyMin = 10;
 		var nprFeedsAr = [];
 		//nytimes feeds array
 		var nytFeedsAr = [];
@@ -316,3 +314,12 @@ if (Meteor.isServer) {
 
 	});//end Meteor.startup()
 }
+
+Meteor.methods({
+	updateFeeds: function() {
+//TEST think this is going to give scope issue
+		getNprFeeds();
+		getNytFeeds();
+		getHackerNewsIndices();
+	}
+})
