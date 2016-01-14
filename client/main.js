@@ -4,9 +4,9 @@ Meteor.startup(function() {
     var feedNodes;
     var feedNodesLength;
 //TODO maybe change this to a session var, 'isPlaying'
-    // var audioStates = ['playing', 'stopped', 'paused'];
-    // var audioState = audioStates[1];
-    Session.set('audioState', 'stopped');
+    var audioStates = ['playing', 'stopped', 'paused'];
+    var audioState = audioStates[1];
+    //Session.set('audioState', 'stopped');
 
 //setup audio player (web audio api speech synthesis)
     var msg = new SpeechSynthesisUtterance();
@@ -30,7 +30,7 @@ Meteor.startup(function() {
       window.speechSynthesis.speak(msg);
       // console.log('playing audio');
       Session.set('isPlaying', true);
-      // audioState = audioStates[0];
+      audioState = audioStates[0];
     }
 
   //TODO add handling for the audio resume function
@@ -41,14 +41,14 @@ Meteor.startup(function() {
     $('.fa-play').click( function() {
 
       console.log('clicked play');
-      if (Session.get('audioState') === 'stopped' || ((Session.get('audioState') === 'paused') && counter === 0)) { //audioState === audioStates[1]
+      if (audioState === audioStates[1]) { //Session.get('audioState') === 'stopped')
         //start of session where audio has not played
         //or the entire page of feeds has been played and the audio is paused
         feedNodes = document.getElementsByClassName('feed');
         feedNodesLength = feedNodes.length;
         //console.log('feedNodes length: ' + feedNodes.length);
         playNextFeed();
-      } else if (Session.get('audioState') === 'paused') { //if (audioState === audioStates[2])
+      } else if (audioState === audioStates[2]) { //if (Session.get('audioState') === 'paused') 
       //audio paused in the middle of the page of feeds
         if (counter > 0) {
           //NOTE resume only resumes feed[0]; but audio does not play through the list
@@ -58,22 +58,26 @@ Meteor.startup(function() {
           // console.log('audioState: ' + audioState);
         //NOTE cancel increments counter but makes the audio play through the list
         //element.cancel();
-        } //else if (counter === 0) {
-        //   playNextFeed();
+        } else if (counter === 0) {
+          feedNodes = document.getElementsByClassName('feed');
+          feedNodesLength = feedNodes.length;
+          window.speechSynthesis.resume();
+          playNextFeed();
           // console.log('counter: ' + counter);
           // console.log('audioState: ' + audioState);
-        //}
+        }
 
-        Session.set('audioState', 'playing');
-        //audioState = audioStates[0];
+        //Session.set('audioState', 'playing');
+        audioState = audioStates[0];
       }
     });
 
   //TODO click listener for audio Pause button
     $('.fa-pause').click( function() {
       window.speechSynthesis.pause();
-      Session.set('audioState', 'paused');
-//      audioState = audioStates[2];
+      //Session.set('audioState', 'paused');
+      console.log('clicked pause');
+      audioState = audioStates[2];
 //      console.log('audioState: ' + audioState);
     });
 
@@ -86,7 +90,8 @@ Meteor.startup(function() {
             playNextFeed();
         } else if (counter === feedNodesLength - 1) {
             window.speechSynthesis.pause();
-            Session.set('audioState', 'paused');
+            audioState = audioStates[2];
+            //Session.set('audioState', 'paused');
             counter = 0;
         }
     };
